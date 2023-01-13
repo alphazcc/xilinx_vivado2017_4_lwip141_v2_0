@@ -520,6 +520,21 @@ proc generate_lwip_opts {libhandle} {
 
 	set lwip_tcp_keepalive	[expr [common::get_property CONFIG.lwip_tcp_keepalive $libhandle] == true]
 	puts $lwipopts_fd "\#define LWIP_TCP_KEEPALIVE $lwip_tcp_keepalive"
+
+	# EMIO options
+	set use_gmii2rgmii_core_on_eth0 [common::get_property CONFIG.use_gmii2rgmii_core_on_eth0 $libhandle]
+	set use_gmii2rgmii_core_on_eth1 [common::get_property CONFIG.use_gmii2rgmii_core_on_eth1 $libhandle]
+	set gmii2rgmii_core_address_on_eth0 [common::get_property CONFIG.gmii2rgmii_core_address_on_eth0 $libhandle]
+	set gmii2rgmii_core_address_on_eth1 [common::get_property CONFIG.gmii2rgmii_core_address_on_eth1 $libhandle]
+	
+	if { $use_gmii2rgmii_core_on_eth0 == true } {
+	   puts $lwipopts_fd "\#define XPAR_GMII2RGMIICON_0N_ETH1_ADDR $gmii2rgmii_core_address_on_eth0"
+	}
+	
+	if { $use_gmii2rgmii_core_on_eth1 == true } {
+	   puts $lwipopts_fd "\#define XPAR_GMII2RGMIICON_0N_ETH1_ADDR $gmii2rgmii_core_address_on_eth1"
+	}
+		
 	puts $lwipopts_fd ""
 
 	# memory options

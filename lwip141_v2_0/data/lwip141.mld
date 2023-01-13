@@ -17,6 +17,14 @@ BEGIN LIBRARY lwip141
   PARAM name = use_emaclite_on_zynq, desc = "Option if set to 1 ensures emaclite adapter being used in Zynq. Valid only for Zynq", type = int, default = 1;
   PARAM name = lwip_tcp_keepalive, desc = "Enable keepalive processing with default interval", type = bool, default = false;
 
+  BEGIN CATEGORY emio_options
+    PARAM name = emio_options, desc = "Settings for ETH using EMIO in PL";
+	PARAM name = use_gmii2rgmii_core_on_eth0, desc = "Settings for ETH0 using GMII to RGMII ip core in PL", type = bool, default = false;
+	PARAM name = use_gmii2rgmii_core_on_eth1, desc = "Settings for ETH1 using GMII to RGMII ip core in PL", type = bool, default = false;
+	PARAM name = gmii2rgmii_core_address_on_eth0, desc = "Settings for ETH0's PHY address of GMII to RGMII ip core in PL", type = int, default = 0;
+	PARAM name = gmii2rgmii_core_address_on_eth1, desc = "Settings for ETH1's PHY address of GMII to RGMII ip core in PL", type = int, default = 0;
+  END CATEGORY
+  
   BEGIN CATEGORY temac_adapter_options
 	PARAM name = temac_adapter_options, desc = "Settings for xps-ll-temac/Axi-Ethernet/Gem lwIP adapter", type = bool, default = true, permit = none;
 	PARAM name = n_tx_descriptors, desc = "Number of TX Buffer Descriptors to be used in SDMA mode", type = int, default = 64;
